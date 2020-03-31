@@ -50,9 +50,9 @@ defmodule Hubspot.ContactProperties do
 
   ## Example
 
-      iex> Hubspot.ContactProperties.create([name: "test", label: "New test", type: "string"])
+      iex> Hubspot.ContactProperties.create(%{name: "test", label: "New test", type: "string"})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v2/properties",
-        method: :post, query: [], body: [name: "test", label: "New test", type: "string"]}
+        method: :post, query: [], body: %{name: "test", label: "New test", type: "string"}}
   """
   @spec create(list) :: %Hubspot.HTTP.Request{}
   def create(property) do
@@ -71,9 +71,9 @@ defmodule Hubspot.ContactProperties do
 
   ## Example
 
-      iex> Hubspot.ContactProperties.update([name: "test", description: "Cool"])
+      iex> Hubspot.ContactProperties.update(%{name: "test", description: "Cool"})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v2/properties/named/test",
-        method: :put, query: [], body: [name: "test", description: "Cool"]}
+        method: :put, query: [], body: %{name: "test", description: "Cool"}}
   """
   @spec update(list) :: %Hubspot.HTTP.Request{}
   def update(property) do

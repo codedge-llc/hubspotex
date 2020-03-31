@@ -39,11 +39,11 @@ defmodule Hubspot.Contacts do
   Get a contact matching the email.
 
   ## Example
-      iex> Hubspot.Contacts.create([properties: [name: "test", value: "test"]])
+      iex> Hubspot.Contacts.create(%{properties: [%{name: "test", value: "test"}]})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact",
-        method: :post, query: [], body: [properties: [name: "test", value: "test"]]}
+        method: :post, query: [], body: %{properties: [%{name: "test", value: "test"}]}}
   """
-  @spec create(list) :: %Hubspot.HTTP.Request{}
+  @spec create(map) :: %Hubspot.HTTP.Request{}
   def create(properties) do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/contact",
@@ -55,9 +55,9 @@ defmodule Hubspot.Contacts do
   Get a contact matching the email.
 
   ## Example
-      iex> Hubspot.Contacts.update(1234, [properties: [name: "first_name", value: "Fred"]])
+      iex> Hubspot.Contacts.update(1234, %{properties: [%{name: "first_name", value: "Fred"}]})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/vid/1234/profile",
-        method: :post, query: [], body: [properties: [name: "first_name", value: "Fred"]]}
+        method: :post, query: [], body: %{properties: [%{name: "first_name", value: "Fred"}]}}
   """
   @spec update(integer, list) :: %Hubspot.HTTP.Request{}
   def update(id, properties) do
@@ -71,9 +71,9 @@ defmodule Hubspot.Contacts do
   Get a contact matching the email.
 
   ## Example
-      iex> Hubspot.Contacts.create_or_update("test@hubspot.com", [properties: [name: "first_name", value: "Fred"]])
+      iex> Hubspot.Contacts.create_or_update("test@hubspot.com", %{properties: [%{name: "first_name", value: "Fred"}]})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/createOrUpdate/email/test@hubspot.com",
-        method: :post, query: [], body: [properties: [name: "first_name", value: "Fred"]]}
+        method: :post, query: [], body: %{properties: [%{name: "first_name", value: "Fred"}]}}
   """
   @spec create_or_update(String.t, list) :: %Hubspot.HTTP.Request{}
   def create_or_update(email, properties \\ "") do
@@ -87,11 +87,11 @@ defmodule Hubspot.Contacts do
   Get a contact matching the email.
 
   ## Example
-      iex> Hubspot.Contacts.create_or_update_batch([vid: [1234, 1235]])
+      iex> Hubspot.Contacts.create_or_update_batch(%{vid: [1234, 1235]})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/batch",
-        method: :post, query: [], body: [vid: [1234, 1235]]}
+        method: :post, query: [], body: %{vid: [1234, 1235]}}
   """
-  @spec create_or_update_batch(list) :: %Hubspot.HTTP.Request{}
+  @spec create_or_update_batch(map) :: %Hubspot.HTTP.Request{}
   def create_or_update_batch(contacts) do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/contact/batch",
@@ -122,10 +122,10 @@ defmodule Hubspot.Contacts do
   ## Example
       iex> Hubspot.Contacts.recent()
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/lists/recently_updated/contacts/recent",
-        method: :get, query: [], body: ""}
+        method: :get, query: %{}, body: ""}
   """
-  @spec recent(list) :: %Hubspot.HTTP.Request{}
-  def recent(params \\ []) do
+  @spec recent(map) :: %Hubspot.HTTP.Request{}
+  def recent(params \\ %{}) do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/lists/recently_updated/contacts/recent",
       method: :get,
@@ -155,9 +155,9 @@ defmodule Hubspot.Contacts do
   endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
 
   ## Example
-      iex> Hubspot.Contacts.get_batch_by_ids([{:vid, 1234},{:vid, 4321}])
+      iex> Hubspot.Contacts.get_batch_by_ids([%{vid: 1234},%{vid: 4321}])
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/vids/batch",
-        method: :get, query: [{:vid, 1234},{:vid, 4321}], body: ""}
+        method: :get, query: [%{vid: 1234},%{vid: 4321}], body: ""}
   """
   @spec get_batch_by_ids(list) :: %Hubspot.HTTP.Request{}
   def get_batch_by_ids(params) do
@@ -174,9 +174,9 @@ defmodule Hubspot.Contacts do
   endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
 
   ## Example
-      iex> Hubspot.Contacts.get_batch_by_emails([{:email, "test@hubspot.com"},{:email, "test2@hubspot.com"}])
+      iex> Hubspot.Contacts.get_batch_by_emails([%{email: "test@hubspot.com"},%{email: "test2@hubspot.com"}])
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/emails/batch",
-        method: :get, query: [{:email, "test@hubspot.com"},{:email, "test2@hubspot.com"}], body: ""}
+        method: :get, query: [%{email: "test@hubspot.com"},%{email: "test2@hubspot.com"}], body: ""}
   """
   @spec get_batch_by_emails(list) :: %Hubspot.HTTP.Request{}
   def get_batch_by_emails(params) do
@@ -212,9 +212,9 @@ defmodule Hubspot.Contacts do
   you'll need to spin up a proxy server to interact with the API.
 
   ## Example
-      iex> Hubspot.Contacts.get_batch_by_tokens([{:utk, 1234}, {:utk, 4523}])
+      iex> Hubspot.Contacts.get_batch_by_tokens([%{utk: 1234}, %{utk: 4523}])
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/utks/batch",
-        method: :get, query: [{:utk, 1234}, {:utk, 4523}], body: ""}
+        method: :get, query: [%{utk: 1234}, %{utk: 4523}], body: ""}
   """
   @spec get_batch_by_tokens(list) :: %Hubspot.HTTP.Request{}
   def get_batch_by_tokens(params) do
@@ -234,11 +234,11 @@ defmodule Hubspot.Contacts do
   more data about that particular contact by its ID.
 
   ## Example
-      iex> Hubspot.Contacts.search({:q, "test@hubapi.com"})
+      iex> Hubspot.Contacts.search(%{q: "test@hubapi.com"})
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/search/query",
-        method: :get, query: {:q, "test@hubapi.com"}, body: ""}
+        method: :get, query: %{q: "test@hubapi.com"}, body: ""}
   """
-  @spec search(list) :: %Hubspot.HTTP.Request{}
+  @spec search(map) :: %Hubspot.HTTP.Request{}
   def search(query) do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/search/query",
