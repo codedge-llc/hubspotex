@@ -59,7 +59,7 @@ defmodule Hubspot.Contacts do
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/vid/1234/profile",
         method: :post, query: [], body: %{properties: [%{name: "first_name", value: "Fred"}]}}
   """
-  @spec update(integer, list) :: %Hubspot.HTTP.Request{}
+  @spec update(integer, map) :: %Hubspot.HTTP.Request{}
   def update(id, properties) do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/contact/vid/#{id}/profile",
@@ -75,7 +75,7 @@ defmodule Hubspot.Contacts do
       %Hubspot.HTTP.Request{endpoint: "/contacts/v1/contact/createOrUpdate/email/test@hubspot.com",
         method: :post, query: [], body: %{properties: [%{name: "first_name", value: "Fred"}]}}
   """
-  @spec create_or_update(String.t, list) :: %Hubspot.HTTP.Request{}
+  @spec create_or_update(String.t, map) :: %Hubspot.HTTP.Request{}
   def create_or_update(email, properties \\ "") do
     %Hubspot.HTTP.Request{
       endpoint: "/contacts/v1/contact/createOrUpdate/email/#{email}",
